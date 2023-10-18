@@ -1,19 +1,31 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { connectToDatabase } from "../../../libs/oracledb";
 import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export const GET = async (req, res) => {
+  console.log("GET request received"); // Add this line
   try {
     const db = await connectToDatabase();
     if (!db) {
       throw new Error("Database connection is not established.");
     }
+    const url = new URL(req.url);
+    const PatientID = url.searchParams.get("PatientID");
 
-    // Handle GET request to retrieve doctors
-    const query = "SELECT * FROM DOCTOR";
-    const result = await db.execute(`SELECT * FROM DOCTOR`, [], {
-      outFormat: db.OUT_FORMAT_OBJECT,
-    });
+    // Get the PatientID from the param
+
+    // Handle GET request to retrieve appointments
+    const query = `SELECT * FROM APPOINTMENT WHERE PatientID = :PatientID`;
+    console.log(query);
+    const result = await db.execute(
+      query,
+      { PatientID },
+      {
+        outFormat: db.OUT_FORMAT_OBJECT,
+      }
+    );
+
     // Release the database connection
     db.release();
 
@@ -29,13 +41,12 @@ export const POST = async (req, res) => {
   console.log(body);
 
   const {
-    FirstName,
-    LastName,
-    Gender,
-    Email,
-    Password,
-    ContactNumber,
-    Specialization,
+    DoctorID,
+    PatientID,
+    AppointmentDate,
+    Status,
+    MedicationPrescribed,
+    DoctorNotes,
   } = body;
 
   try {
@@ -44,20 +55,19 @@ export const POST = async (req, res) => {
       throw new Error("Database connection is not established.");
     }
 
-    // Create an INSERT query
+    // Create an INSERT query for appointments
     const result = await db.execute(
       `
-      INSERT INTO DOCTOR (FirstName, LastName, Gender, Email, Password, ContactNumber, Specialization)
-      VALUES (:FirstName, :LastName, :Gender, :Email, :Password, :ContactNumber, :Specialization)
+      INSERT INTO APPOINTMENT (DoctorID, PatientID, AppointmentDate, Status, MedicationPrescribed, DoctorNotes)
+      VALUES (:DoctorID, :PatientID, :AppointmentDate, :Status, :MedicationPrescribed, :DoctorNotes)
     `,
       {
-        FirstName,
-        LastName,
-        Gender,
-        Email,
-        Password,
-        ContactNumber,
-        Specialization,
+        DoctorID,
+        PatientID,
+        AppointmentDate,
+        Status,
+        MedicationPrescribed,
+        DoctorNotes,
       },
       { outFormat: db.OUT_FORMAT_OBJECT, autoCommit: true }
     );
@@ -68,7 +78,7 @@ export const POST = async (req, res) => {
     db.release();
 
     return NextResponse.json(
-      { message: "Doctor created successfully" },
+      { message: "Appointment created successfully" },
       { status: 201 }
     );
   } catch (error) {

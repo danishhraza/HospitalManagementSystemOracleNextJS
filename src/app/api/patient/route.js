@@ -9,9 +9,9 @@ export const GET = async (req, res) => {
       throw new Error("Database connection is not established.");
     }
 
-    // Handle GET request to retrieve doctors
-    const query = "SELECT * FROM DOCTOR";
-    const result = await db.execute(`SELECT * FROM DOCTOR`, [], {
+    // Handle GET request to retrieve appointments
+    const query = "SELECT * FROM PATIENT";
+    const result = await db.execute(`SELECT * FROM PATIENT`, [], {
       outFormat: db.OUT_FORMAT_OBJECT,
     });
     // Release the database connection
@@ -34,8 +34,9 @@ export const POST = async (req, res) => {
     Gender,
     Email,
     Password,
+    DateOfBirth,
     ContactNumber,
-    Specialization,
+    Address,
   } = body;
 
   try {
@@ -44,11 +45,11 @@ export const POST = async (req, res) => {
       throw new Error("Database connection is not established.");
     }
 
-    // Create an INSERT query
+    // Create an INSERT query for appointments
     const result = await db.execute(
       `
-      INSERT INTO DOCTOR (FirstName, LastName, Gender, Email, Password, ContactNumber, Specialization)
-      VALUES (:FirstName, :LastName, :Gender, :Email, :Password, :ContactNumber, :Specialization)
+      INSERT INTO APPOINTMENT (FirstName, LastName, Gender, Email, Password, DateOfBirth, ContactNumber, Address)
+      VALUES (:FirstName, :LastName, :Gender, :Email, :Password, :DateOfBirth, :ContactNumber, :Address)
     `,
       {
         FirstName,
@@ -56,8 +57,9 @@ export const POST = async (req, res) => {
         Gender,
         Email,
         Password,
+        DateOfBirth,
         ContactNumber,
-        Specialization,
+        Address,
       },
       { outFormat: db.OUT_FORMAT_OBJECT, autoCommit: true }
     );
@@ -68,7 +70,7 @@ export const POST = async (req, res) => {
     db.release();
 
     return NextResponse.json(
-      { message: "Doctor created successfully" },
+      { message: "Appointment created successfully" },
       { status: 201 }
     );
   } catch (error) {

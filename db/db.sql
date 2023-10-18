@@ -42,7 +42,25 @@ INSERT INTO Doctor (FirstName, LastName, Gender, Email, Password, ContactNumber,
 VALUES ('John', 'Doe', 'Male', 'doctor@gmail.com', 'password', '55512345567', 'Cardiologist');
 
 
+
+-- Inserting dummy values into the PATIENT table
+INSERT INTO PATIENT (FirstName, LastName, Gender, Email, Password, DateOfBirth, ContactNumber, Address)
+VALUES
+  ('Jane', 'Smith', 'Female', 'jane.smith@example.com', 'securepass', TO_DATE('1985-03-22', 'YYYY-MM-DD'), '9876543210', '456 Elm St');
+
+
+-- Inserting dummy values into the APPOINTMENT table
+INSERT INTO APPOINTMENT (PatientID, DoctorID, AppointmentDate, Status, MedicationPrescribed, DoctorNotes)
+VALUES
+  (1, 21, TO_DATE('2023-11-10', 'YYYY-MM-DD'), 'Confirmed', 'Ibuprofen', 'No specific instructions');
+
+
+
 SELECT * FROM Doctor;
+SELECT * FROM APPOINTMENT;
+SELECT * FROM PATIENT;
+
+SELECT * FROM APPOINTMENT WHERE PatientID = 1;
 
 DROP TABLE DOCTOR;
 DROP TABLE PATIENT;
