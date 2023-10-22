@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import AppointmentCard from "@/components/AppointmentCard";
+import AppointmentCardSingle from "@/components/AppointmentCardSingle";
 import { usePathname } from "next/navigation";
 
 // Function to fetch appointment data by ID
@@ -20,45 +20,48 @@ const getAppointment = async (appointmentID) => {
     console.log("Fetched appointment data:", data);
     return data;
   } catch (error) {
-    console.log("Error loading appointment", error);
-    return null; // Return null in case of error
+    console.error("Error loading appointment", error);
+    throw error; // Rethrow the error to handle it in the component
   }
 };
 
 export default function SingleAppointment() {
   const pathname = usePathname();
   const [appointment, setAppointment] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Split the URL by "/"
     const parts = pathname.split("/");
     const index = parts.indexOf("singleappointment");
 
-    if (index !== -1 && index < parts.length - 1) {
-      const result = parts[index + 1];
-      getAppointment(result)
-        .then((data) => {
-          if (data) {
-            setAppointment(data);
-          } else {
-            // Handle the case where the appointment is not found
-            setAppointment(null); // You can set it to null to display an error message
-          }
-        })
-        .catch((error) => {
-          // Handle the error
+    const fetchData = async () => {
+      if (index !== -1 && index < parts.length - 1) {
+        const result = parts[index + 1];
+        try {
+          const data = await getAppointment(result);
+          setAppointment(data);
+        } catch (error) {
           console.error("Error:", error);
-        });
-    } else {
-      // Handle the case where "singleappointment" is not found in the URL
-      setAppointment(null); // You can set it to null to display an error message
-    }
+          setAppointment(null); // Set it to null in case of an error
+        } finally {
+          setLoading(false); // Mark loading as complete, whether successful or not
+        }
+      } else {
+        setAppointment(null);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [pathname]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (appointment === null) {
     return <div>Appointment not found or an error occurred.</div>;
-  } else if (appointment === undefined) {
-    return <div>Loading...</div>;
   }
 
   return (
@@ -70,7 +73,7 @@ export default function SingleAppointment() {
             <h1>Appointment Details</h1>
           </div>
         </div>
-        <AppointmentCard appointment={appointment} />
+        <AppointmentCardSingle appointment={appointment[0]} />
       </div>
     </div>
   );

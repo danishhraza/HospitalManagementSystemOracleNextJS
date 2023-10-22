@@ -1,39 +1,39 @@
 "use client";
 import React from "react";
 
-const AppointmentCard = ({ appointment }) => {
+const AppointmentCardSingle = ({ appointment }) => {
+  appointment = appointment;
+  console.log(appointment);
   return (
     <div className="flex justify-center">
       <div className="bg-white border border-red-700 p-4 rounded shadow-md m-4 w-[500px] mb-10">
         <h2 className="mb-2">
           <span className="font-semibold">Appointment ID:</span>{" "}
-          {appointment.AppointmentID}
+          {appointment[0]}
         </h2>
         <p className="text-gray-600 mb-2">
-          <span className="font-semibold">Patient ID:</span>{" "}
-          {appointment.PatientID}
+          <span className="font-semibold">Patient ID:</span> {appointment[1]}
         </p>
         <p className="text-gray-600 mb-2">
-          <span className="font-semibold">Doctor ID:</span>{" "}
-          {appointment.DoctorID}
+          <span className="font-semibold">Doctor ID:</span> {appointment[2]}
         </p>
         <p className="text-gray-600 mb-2">
           <span className="font-semibold">Appointment Date:</span>{" "}
-          {appointment.AppointmentDate}
+          {appointment[3]}
         </p>
         <p className="text-gray-600 mb-2">
-          <span className="font-semibold">Status:</span> {appointment.Status}
+          <span className="font-semibold">Status:</span> {appointment[4]}
         </p>
-        {appointment.MedicationPrescribed && (
+        {appointment[5] && (
           <p className="text-gray-600 mb-2">
             <span className="font-semibold">Medication Prescribed:</span>{" "}
-            {appointment.MedicationPrescribed}
+            {appointment[5]}
           </p>
         )}
-        {appointment.DoctorNotes && (
+        {appointment[6] && (
           <p className="text-gray-600 mb-2">
             <span className="font-semibold">Doctor Notes:</span>{" "}
-            {appointment.DoctorNotes}
+            {appointment[6]}
           </p>
         )}
       </div>
@@ -41,4 +41,4 @@ const AppointmentCard = ({ appointment }) => {
   );
 };
 
-export default AppointmentCard;
+export default AppointmentCardSingle;

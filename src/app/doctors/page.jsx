@@ -23,7 +23,7 @@ export default async function DoctorsList() {
   return (
     <div className="mt-[9rem]">
       <div className="flex justify-center mb-10">
-        <div className="text-center bg-[#2d2a3b] p-7 w-[50%] text-white text-5xl rounded-2xl backdrop-blur-lg">
+        <div className="text-center bg-[#0F3D3E] p-7 w-[50%] text-white text-5xl rounded-2xl backdrop-blur-lg">
           <h1>Available Doctors</h1>
         </div>
       </div>
@@ -32,13 +32,13 @@ export default async function DoctorsList() {
           <DoctorCard
             key={index}
             doctor={{
-              ID: doctor[0],
-              FirstName: doctor[1],
-              LastName: doctor[2],
-              Gender: doctor[3],
-              Email: doctor[4],
-              ContactNumber: doctor[6],
-              Specialization: doctor[7],
+              ID: doctor[1],
+              FirstName: doctor[2],
+              LastName: doctor[3],
+              Gender: doctor[4],
+              Email: doctor[5],
+              ContactNumber: doctor[5],
+              Specialization: doctor[6],
               // Add other properties as needed
             }}
           />

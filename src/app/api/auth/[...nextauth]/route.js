@@ -71,7 +71,11 @@ export const authOptions = {
       name: "creds",
       credentials: {
         email: { label: "Email", placeholder: "patient@luxecare.com" },
-        password: { label: "Password", placeholder: "Password" },
+        password: {
+          label: "Password",
+          type: "password",
+          placeholder: "Password",
+        },
       },
       async authorize(credentials, req) {
         if (!credentials || !credentials.email || !credentials.password)

@@ -1,11 +1,17 @@
 import React from "react";
 import AppointmentCard from "@/components/AppointmentCard";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
-const getAppointment = async () => {
+const getAppointment = async (PatientID) => {
   try {
-    const res = await fetch("http://localhost:3000/api/appointment", {
-      cache: "no-store",
-    });
+    console.log("Fetching appointment for appointmentID:", PatientID);
+    const res = await fetch(
+      `http://localhost:3000/api/appointment?PatientID=${PatientID}`,
+      {
+        cache: "no-store",
+      }
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch appointments");
     }
@@ -18,7 +24,10 @@ const getAppointment = async () => {
 };
 
 export default async function AppointmentsList() {
-  const appointments = await getAppointment();
+  const data = await getServerSession(authOptions);
+  const UserPatientID = data.user.id;
+  console.log(UserPatientID);
+  const appointments = await getAppointment(UserPatientID);
   console.log(appointments); // Add this line for debugging
   return (
     <div className="mt-[9rem]">

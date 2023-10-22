@@ -109,10 +109,15 @@ const Register = () => {
   };
 
   return (
-    <div className="container mx-auto mt-[10rem]">
+    <div className="mx-auto mt-[10rem] mb-10 bg-[#0F3D3E] p-10 rounded-lg flex flex-col w-[25%]">
+      <h1 className="text-2xl text-white font-bold mb-8">
+        Register To LuxeCare
+      </h1>
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label htmlFor="FirstName">First Name</label>
+        <div className="mb-4 flex flex-col gap-2">
+          <label htmlFor="FirstName" className="text-white">
+            First Name
+          </label>
           <input
             type="text"
             id="FirstName"
@@ -120,43 +125,72 @@ const Register = () => {
             value={formData.FirstName}
             onChange={handleChange}
             required
-            className="border-2"
+            className="p-1"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="LastName">Last Name</label>
+        <div className="mb-4 flex flex-col gap-2">
+          <label htmlFor="LastName" className="text-white">
+            Last Name
+          </label>
           <input
             type="text"
             id="LastName"
             name="LastName"
             value={formData.LastName}
             onChange={handleChange}
+            className="p-1"
             required
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="Email">Email</label>
+        <div className="mb-4 flex flex-col gap-2">
+          <label htmlFor="Email" className="text-white">
+            Email
+          </label>
           <input
             type="email"
             id="Email"
             name="Email"
             value={formData.Email}
             onChange={handleChange}
+            className="p-1"
             required
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="Gender">Gender</label>
-          <input
-            type="text"
-            id="Gender"
-            name="Gender"
-            value={formData.Gender}
-            onChange={handleChange}
-          />
+        <div className="mb-4 flex flex-col gap-2">
+          <label className="text-white">Gender</label>
+          <div className="flex items-center space-x-2">
+            <input
+              type="radio"
+              id="Male"
+              name="Gender"
+              value="Male"
+              checked={formData.Gender === "Male"}
+              onChange={handleChange}
+              className="text-indigo-600 border-gray-300 focus:ring-indigo-200"
+            />
+            <label htmlFor="Male" className="text-white">
+              Male
+            </label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <input
+              type="radio"
+              id="Female"
+              name="Gender"
+              value="Female"
+              checked={formData.Gender === "Female"}
+              onChange={handleChange}
+              className="text-indigo-600 border-gray-300 focus:ring-indigo-200"
+            />
+            <label htmlFor="Female" className="text-white">
+              Female
+            </label>
+          </div>
         </div>
-        <div className="mb-4">
-          <label htmlFor="DateOfBirth">Date of Birth</label>
+        <div className="mb-4 flex flex-col gap-2">
+          <label htmlFor="DateOfBirth" className="text-white">
+            Date of Birth
+          </label>
           <input
             type="date"
             id="DateOfBirth"
@@ -165,34 +199,43 @@ const Register = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="ContactNumber">Contact Number</label>
+        <div className="mb-4 flex flex-col gap-2">
+          <label htmlFor="ContactNumber" className="text-white">
+            Contact Number
+          </label>
           <input
             type="text"
             id="ContactNumber"
             name="ContactNumber"
+            className="p-1"
             value={formData.ContactNumber}
             onChange={handleChange}
             required
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="Address">Address</label>
+        <div className="mb-4 flex flex-col gap-2">
+          <label htmlFor="Address" className="text-white">
+            Address
+          </label>
           <input
             type="text"
             id="Address"
             name="Address"
+            className="p-1"
             value={formData.Address}
             onChange={handleChange}
             required
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="Password">Password</label>
+        <div className="mb-4 flex flex-col gap-2">
+          <label htmlFor="Password" className="text-white">
+            Password
+          </label>
           <input
             type="password"
             id="Password"
             name="Password"
+            className="p-1"
             value={formData.Password}
             onChange={handleChange}
             required

@@ -55,6 +55,9 @@ VALUES ('John', 'Doe', 'Male', '55512345567', 'Cardiologist', 1);
 INSERT INTO PATIENT (FirstName, LastName, Gender, DateOfBirth, ContactNumber, Address, UserID)
 VALUES ('Jane', 'Smith', 'Female', TO_DATE('1985-03-22', 'YYYY-MM-DD'), '9876543210', '456 Elm St', 2);
 
+INSERT INTO APPOINTMENT (PatientID, DoctorID, AppointmentDate, Status)
+VALUES (41, 2, TO_DATE('2024-11-15', 'YYYY-MM-DD'), 'Pending Approval');
+
 
 SELECT * FROM USERS;
 SELECT * FROM Doctor;
@@ -63,10 +66,10 @@ SELECT * FROM APPOINTMENT;
 
 
 DELETE FROM USERS
-WHERE UserID = 22;
+WHERE UserID = 23;
 
 DELETE FROM PATIENT
-WHERE UserID = 21;
+WHERE UserID = 23;
 
 DROP TABLE DOCTOR;
 DROP TABLE PATIENT;
