@@ -3,22 +3,21 @@ import { connectToDatabase } from "../../../libs/oracledb";
 import { NextResponse } from "next/server";
 
 export const GET = async (req, res) => {
-  console.log("GET request received"); // Add this line
   try {
     const db = await connectToDatabase();
     if (!db) {
       throw new Error("Database connection is not established.");
     }
     const url = new URL(req.url);
-    const AppointmentID = url.searchParams.get("AppointmentID");
+    const UserID = url.searchParams.get("UserID");
 
-    // Get the PatientID from the param
+    // Get the UserID from the param
 
     // Handle GET request to retrieve appointments
-    const query = `SELECT * FROM APPOINTMENT WHERE AppointmentID = :AppointmentID`;
+    const query = `SELECT * FROM PATIENT WHERE UserID = :UserID`;
     const result = await db.execute(
       query,
-      { AppointmentID },
+      { UserID },
       {
         outFormat: db.OUT_FORMAT_OBJECT,
       }

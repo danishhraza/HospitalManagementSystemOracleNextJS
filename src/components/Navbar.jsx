@@ -1,9 +1,13 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
+import { useSession, SessionProvider } from "next-auth/react"; // Import SessionProvider
+
 import Menu from "./Menu";
 
 const Navbar = () => {
+  const { data: session } = useSession();
   return (
     <div className="h-16 fixed left-[10%] top-4 flex justify-between items-center w-[80%] bg-[#100F0F] rounded-full p-8 z-20">
       {/* LOGO  */}
@@ -17,10 +21,22 @@ const Navbar = () => {
         <Menu />
       </div>
       {/* RIGHT LINKS  */}
-      <div className="hidden lg:flex gap-4 text-white cursor-pointer">
+      <div className="hidden lg:flex gap-4 text-white cursor-pointer self-center">
         <Link href="/">Home</Link>
-        <Link href="/login">Login</Link>
-        <Link href="/register">Register</Link>
+        {session ? (
+          <div className="flex gap-2">
+            <Link href="/api/auth/signout">Logout</Link>
+            <div className="flex gap-2 bg-white rounded-lg p-1 text-black">
+              <p>{session.user.firstName}</p>
+              <p>{session.user.role}</p>
+            </div>
+          </div>
+        ) : (
+          <>
+            <Link href="/api/auth/signin">Login</Link>
+            <Link href="/register">Register</Link>
+          </>
+        )}
       </div>
     </div>
   );

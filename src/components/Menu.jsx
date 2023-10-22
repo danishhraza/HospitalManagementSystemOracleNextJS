@@ -6,8 +6,9 @@ import Hamburger from "hamburger-react";
 
 const links = [
   { id: 1, title: "Home", url: "/" },
-  { id: 2, title: "Login", url: "/about" },
-  { id: 2, title: "Register", url: "/register" },
+  { id: 2, title: "Login", url: "/api/auth/signin" },
+  { id: 3, title: "Register", url: "/register" },
+  { id: 4, title: "Logout", url: "/api/auth/signout-" },
 ];
 
 const Menu = () => {
