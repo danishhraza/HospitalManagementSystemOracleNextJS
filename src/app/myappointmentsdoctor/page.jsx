@@ -3,11 +3,11 @@ import AppointmentCard from "@/components/AppointmentCard";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 
-const getAppointment = async (PatientID) => {
+const getAppointment = async (DoctorID) => {
   try {
-    console.log("Fetching appointment for appointmentID:", PatientID);
+    console.log("Fetching appointment for DoctorID:", DoctorID);
     const res = await fetch(
-      `http://localhost:3000/api/appointment?PatientID=${PatientID}`,
+      `http://localhost:3000/api/appointmentdoctor?DoctorID=${DoctorID}`,
       {
         cache: "no-store",
       }
@@ -25,9 +25,9 @@ const getAppointment = async (PatientID) => {
 
 export default async function AppointmentsList() {
   const data = await getServerSession(authOptions);
-  const UserPatientID = data.user.id;
-  console.log(UserPatientID);
-  const appointments = await getAppointment(UserPatientID);
+  const UserDoctorID = data.user.id;
+  console.log(UserDoctorID);
+  const appointments = await getAppointment(UserDoctorID);
   console.log(appointments); // Add this line for debugging
   return (
     <div className="mt-[9rem]">

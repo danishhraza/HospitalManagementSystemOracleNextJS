@@ -19,7 +19,8 @@ export default withAuth(
     }
 
     if (
-      req.nextUrl.pathname === "/patients" &&
+      (req.nextUrl.pathname === "/patients" ||
+        req.nextUrl.pathname === "/myappointmentsdoctor") &&
       req.nextauth.token?.role !== "doctor"
     ) {
       return new NextResponse("You are not authorized!");
@@ -36,5 +37,10 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/patients", "/myappointment", "/bookappointment"],
+  matcher: [
+    "/patients",
+    "/myappointment",
+    "/bookappointment",
+    "/myappointmentsdoctor",
+  ],
 };

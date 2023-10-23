@@ -34,7 +34,7 @@ CREATE TABLE APPOINTMENT (
   PatientID NUMBER NOT NULL,
   DoctorID NUMBER NOT NULL,
   AppointmentDate DATE NOT NULL,
-  Status VARCHAR2(20) NOT NULL CHECK (Status IN ('Pending Approval', 'Confirmed', 'Completed', 'Canceled', 'Missed')),
+  Status VARCHAR2(20) CHECK (Status IN ('Pending Approval', 'Confirmed', 'Completed', 'Canceled', 'Missed')) DEFAULT 'Pending Approval',
   MedicationPrescribed VARCHAR2(255),
   DoctorNotes VARCHAR2(255),
   FOREIGN KEY (PatientID) REFERENCES PATIENT(PatientID),

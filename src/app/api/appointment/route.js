@@ -16,7 +16,7 @@ export const GET = async (req, res) => {
     // Get the PatientID from the param
 
     // Handle GET request to retrieve appointments
-    const query = `SELECT * FROM APPOINTMENT WHERE PatientID = :PatientID`;
+    const query = `SELECT * FROM APPOINTMENT WHERE PatientID = :PatientID ORDER BY AppointmentDate DESC`;
     console.log(query);
     const result = await db.execute(
       query,
@@ -44,9 +44,7 @@ export const POST = async (req, res) => {
     DoctorID,
     PatientID,
     AppointmentDate,
-    Status,
-    MedicationPrescribed,
-    DoctorNotes,
+    Status = "Pending Approval",
   } = body;
 
   try {
@@ -58,16 +56,14 @@ export const POST = async (req, res) => {
     // Create an INSERT query for appointments
     const result = await db.execute(
       `
-      INSERT INTO APPOINTMENT (DoctorID, PatientID, AppointmentDate, Status, MedicationPrescribed, DoctorNotes)
-      VALUES (:DoctorID, :PatientID, :AppointmentDate, :Status, :MedicationPrescribed, :DoctorNotes)
+      INSERT INTO APPOINTMENT (DoctorID, PatientID, AppointmentDate, Status)
+      VALUES (:DoctorID, :PatientID, TO_DATE(:AppointmentDate, 'YYYY-MM-DD'), :Status)
     `,
       {
         DoctorID,
         PatientID,
         AppointmentDate,
         Status,
-        MedicationPrescribed,
-        DoctorNotes,
       },
       { outFormat: db.OUT_FORMAT_OBJECT, autoCommit: true }
     );

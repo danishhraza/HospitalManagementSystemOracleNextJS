@@ -52,6 +52,12 @@ export default async function Home() {
                 buttonLabel="View All"
                 buttonHref="/patients"
               />
+              <Cards
+                imageSrc="/images/lookup.png"
+                title="My Appointments"
+                buttonLabel="View All"
+                buttonHref="/myappointmentsdoctor"
+              />
             </>
           )}
         </div>
