@@ -60,6 +60,16 @@ export default async function Home() {
               />
             </>
           )}
+          {userRole === "admin" && (
+            <>
+              <Cards
+                imageSrc="/images/patient.png"
+                title="Add Doctor"
+                buttonLabel="Add"
+                buttonHref="/adddoctor"
+              />
+            </>
+          )}
         </div>
       </div>
     </main>

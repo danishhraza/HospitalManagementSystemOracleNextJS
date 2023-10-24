@@ -30,9 +30,12 @@ const Navbar = () => {
               Logout
             </Link>
             <div className="flex gap-2 bg-white rounded-lg p-[7px] text-black ml-2">
-              <p>{session.user.firstName}</p>
+              <p>
+                {session.user.role !== "admin"
+                  ? session.user.firstName
+                  : "Admin"}
+              </p>
               <PersonIcon />
-              {/* <p>{session.user.role}</p> */}
             </div>
           </div>
         ) : (

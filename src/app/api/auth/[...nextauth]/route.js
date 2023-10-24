@@ -102,6 +102,12 @@ export const authOptions = {
             };
             console.log("Returning user object:", userObj); // Add this console log
             return userObj;
+          } else {
+            const userObj = {
+              role: user[0][3],
+              email: user[0][1],
+            };
+            return userObj;
           }
         }
         console.log("Authentication failed. Returning null.");

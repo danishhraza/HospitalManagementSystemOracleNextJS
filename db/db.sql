@@ -45,6 +45,9 @@ INSERT INTO USERS (Email, Password, Role)
 VALUES ('doctor3@example.com', 'doctorpass', 'patient');
 
 INSERT INTO USERS (Email, Password, Role)
+VALUES ('admin@example.com', 'admin', 'admin');
+
+INSERT INTO USERS (Email, Password, Role)
 VALUES ('patient@example.com', 'patientpass');
 
 -- Insert dummy data for a doctor
@@ -66,10 +69,13 @@ SELECT * FROM APPOINTMENT;
 
 
 DELETE FROM USERS
-WHERE UserID = 23;
+WHERE UserID = 66;
 
 DELETE FROM PATIENT
-WHERE UserID = 23;
+WHERE UserID = 66;
+
+DELETE FROM DOCTOR
+WHERE UserID = 66;
 
 DROP TABLE DOCTOR;
 DROP TABLE PATIENT;

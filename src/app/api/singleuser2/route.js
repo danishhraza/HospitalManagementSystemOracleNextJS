@@ -8,12 +8,21 @@ export const GET = async (req, res) => {
     if (!db) {
       throw new Error("Database connection is not established.");
     }
+    const url = new URL(req.url);
+    const Email = url.searchParams.get("Email");
 
-    // Handle GET request to retrieve doctors
-    const query = "SELECT * FROM DOCTOR";
-    const result = await db.execute(`SELECT * FROM DOCTOR`, [], {
-      outFormat: db.OUT_FORMAT_OBJECT,
-    });
+    // Get the Email from the param
+
+    // Handle GET request to retrieve appointments
+    const query = `SELECT * FROM USERS WHERE Email = :Email`;
+    const result = await db.execute(
+      query,
+      { Email },
+      {
+        outFormat: db.OUT_FORMAT_OBJECT,
+      }
+    );
+
     // Release the database connection
     db.release();
 
@@ -28,8 +37,7 @@ export const POST = async (req, res) => {
 
   console.log(body);
 
-  const { UserID, FirstName, LastName, Gender, ContactNumber, Specialization } =
-    body;
+  const { Email, Password, Role = "doctor" } = body;
 
   try {
     const db = await connectToDatabase();
@@ -40,16 +48,13 @@ export const POST = async (req, res) => {
     // Create an INSERT query
     const result = await db.execute(
       `
-      INSERT INTO DOCTOR (UserID, FirstName, LastName, Gender, ContactNumber, Specialization)
-      VALUES (:UserID, :FirstName, :LastName, :Gender, :ContactNumber, :Specialization)
+      INSERT INTO USERS (Email, Password, Role)
+      VALUES (:Email, :Password, :Role)
     `,
       {
-        UserID,
-        FirstName,
-        LastName,
-        Gender,
-        ContactNumber,
-        Specialization,
+        Email,
+        Password,
+        Role,
       },
       { outFormat: db.OUT_FORMAT_OBJECT, autoCommit: true }
     );
@@ -60,7 +65,7 @@ export const POST = async (req, res) => {
     db.release();
 
     return NextResponse.json(
-      { message: "Doctor created successfully" },
+      { message: "User created successfully" },
       { status: 201 }
     );
   } catch (error) {
