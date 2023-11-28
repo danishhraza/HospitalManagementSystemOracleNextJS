@@ -26,6 +26,18 @@ export default async function Home() {
                 buttonLabel="Find Now"
                 buttonHref="/doctors"
               />
+                <Cards
+                imageSrc="/images/Doctor.png"
+                title="Affiliated Pharmacies"
+                buttonLabel="Browse"
+                buttonHref="/pharmacies"
+              />
+                <Cards
+                imageSrc="/images/Doctor.png"
+                title="Procedures"
+                buttonLabel="Browse"
+                buttonHref="/procedures"
+              />
               <Cards2
                 imageSrc="/images/lookup.png"
                 title="Lookup Your Appointment"
@@ -57,7 +69,19 @@ export default async function Home() {
                 title="My Appointments"
                 buttonLabel="View All"
                 buttonHref="/myappointmentsdoctor"
-              />
+              />    
+              <Cards
+                imageSrc="/images/lookup.png"
+                title="Add Procedure"
+                buttonLabel="Add"
+                buttonHref="/addprocedure"
+              />    
+              <Cards
+              imageSrc="/images/lookup.png"
+              title="Update Appointments"
+              buttonLabel="Update"
+              buttonHref="/updateappointment"
+            />
             </>
           )}
           {userRole === "admin" && (
@@ -67,6 +91,12 @@ export default async function Home() {
                 title="Add Doctor"
                 buttonLabel="Add"
                 buttonHref="/adddoctor"
+              />
+               <Cards
+                imageSrc="/images/patient.png"
+                title="Add Pharmacy"
+                buttonLabel="Add"
+                buttonHref="/addpharmacy"
               />
             </>
           )}

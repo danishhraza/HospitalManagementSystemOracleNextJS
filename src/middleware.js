@@ -20,8 +20,18 @@ export default withAuth(
 
     if (
       (req.nextUrl.pathname === "/patients" ||
-        req.nextUrl.pathname === "/myappointmentsdoctor") &&
+        req.nextUrl.pathname === "/myappointmentsdoctor"||
+        req.nextUrl.pathname === "/updateappointment"||
+        req.nextUrl.pathname === "/addprocedure") &&
       req.nextauth.token?.role !== "doctor"
+    ) {
+      return new NextResponse("You are not authorized!");
+    }
+
+    if (
+      (req.nextUrl.pathname === "/adddoctor" ||
+        req.nextUrl.pathname === "/addpharmacy") &&
+      req.nextauth.token?.role !== "admin"
     ) {
       return new NextResponse("You are not authorized!");
     }
@@ -42,5 +52,9 @@ export const config = {
     "/myappointment",
     "/bookappointment",
     "/myappointmentsdoctor",
+    "/updateappointment",
+    "/adddoctor",
+    "/addpharmacy",
+    "/addprocedure",
   ],
 };

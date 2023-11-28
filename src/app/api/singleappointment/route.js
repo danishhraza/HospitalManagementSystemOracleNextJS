@@ -32,3 +32,34 @@ export const GET = async (req, res) => {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 };
+
+export const PATCH = async (req, res) => {
+  console.log("PATCH request received");
+  try {
+    const db = await connectToDatabase();
+    if (!db) {
+      throw new Error("Database connection is not established.");
+    }
+
+    const body = await req.json();
+
+    console.log(body);
+  
+    const { AppointmentID, newStatus } = body;
+
+    const query = `UPDATE APPOINTMENT SET Status = :newStatus WHERE AppointmentID = :AppointmentID`;
+    const result = await db.execute(
+      query,
+      { newStatus, AppointmentID },
+      {
+        autoCommit: true,
+      }
+    );
+
+    db.release();
+
+    return NextResponse.json({ status: "success" }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+};

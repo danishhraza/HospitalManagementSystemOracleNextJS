@@ -1,5 +1,5 @@
 import React from "react";
-import AppointmentCard from "@/components/AppointmentCard";
+import AppointmentDoctorCard from "@/components/AppointmentDoctorCard";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 
@@ -23,12 +23,16 @@ const getAppointment = async (DoctorID) => {
   }
 };
 
+
 export default async function AppointmentsList() {
   const data = await getServerSession(authOptions);
   const UserDoctorID = data.user.id;
   console.log(UserDoctorID);
   const appointments = await getAppointment(UserDoctorID);
   console.log(appointments); // Add this line for debugging
+
+
+
   return (
     <div className="mt-[9rem]">
       <div className="flex justify-center mb-10">
@@ -38,7 +42,7 @@ export default async function AppointmentsList() {
       </div>
       <div className="flex justify-items-start justify-center flex-wrap mb-10 mx-10">
         {appointments.map((appointment, index) => (
-          <AppointmentCard
+          <AppointmentDoctorCard
             key={index}
             appointment={{
               AppointmentID: appointment[0],
@@ -48,7 +52,6 @@ export default async function AppointmentsList() {
               Status: appointment[4],
               MedicationPrescribed: appointment[5],
               DoctorNotes: appointment[6],
-              // Add other properties as needed
             }}
           />
         ))}
