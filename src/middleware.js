@@ -20,9 +20,10 @@ export default withAuth(
 
     if (
       (req.nextUrl.pathname === "/patients" ||
-        req.nextUrl.pathname === "/myappointmentsdoctor"||
-        req.nextUrl.pathname === "/updateappointment"||
-        req.nextUrl.pathname === "/addprocedure") &&
+        req.nextUrl.pathname === "/myappointmentsdoctor" ||
+        req.nextUrl.pathname === "/updateappointment" ||
+        req.nextUrl.pathname === "/addprocedure" ||
+        req.nextUrl.pathname === "/manageprocedures") &&
       req.nextauth.token?.role !== "doctor"
     ) {
       return new NextResponse("You are not authorized!");
@@ -30,7 +31,8 @@ export default withAuth(
 
     if (
       (req.nextUrl.pathname === "/adddoctor" ||
-        req.nextUrl.pathname === "/addpharmacy") &&
+        req.nextUrl.pathname === "/addpharmacy" ||
+        req.nextUrl.pathname === "/managepharmacies") &&
       req.nextauth.token?.role !== "admin"
     ) {
       return new NextResponse("You are not authorized!");
@@ -56,5 +58,7 @@ export const config = {
     "/adddoctor",
     "/addpharmacy",
     "/addprocedure",
+    "/manageprocedures",
+    "/managepharmacies",
   ],
 };

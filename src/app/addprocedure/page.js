@@ -1,6 +1,7 @@
-"use client"
-import React, { useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSession, SessionProvider } from "next-auth/react";
 
 const Register = () => {
   const [procedureData, setProcedureData] = useState({
@@ -11,6 +12,19 @@ const Register = () => {
   });
 
   const router = useRouter();
+
+  const { data: session } = useSession();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (session) {
+      setLoading(false);
+      setProcedureData((prevData) => ({
+        ...prevData,
+        DoctorID: session.user.id,
+      }));
+    }
+  }, [session]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +48,7 @@ const Register = () => {
 
       if (response.ok) {
         // Redirect to success page or any other handling
-        router.push("/success");
+        router.push("/manageprocedures");
       } else {
         // Handle procedure creation error
         console.error("Procedure creation error:", response.statusText);
@@ -43,6 +57,11 @@ const Register = () => {
       console.error("Error creating procedure:", error);
     }
   };
+
+  if (loading) {
+    // You can show a loading indicator here until the session is available
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="mx-auto mt-[10rem] mb-10 bg-[#0F3D3E] p-10 rounded-lg flex flex-col w-[25%]">
@@ -97,10 +116,10 @@ const Register = () => {
             type="text"
             id="DoctorID"
             name="DoctorID"
-            value={procedureData.DoctorID}
+            value={session.user.id}
             onChange={handleChange}
             required
-            className="p-1"
+            className="p-1 bg-gray-300 disabled pointer-events-none"
           />
         </div>
         <button

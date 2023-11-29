@@ -80,7 +80,7 @@ INSERT INTO APPOINTMENT (PatientID, DoctorID, AppointmentDate, Status)
 VALUES (41, 2, TO_DATE('2024-11-15', 'YYYY-MM-DD'), 'Pending Approval');
 
 INSERT INTO PROCEDURE (ProcedureName, Description, Price, DoctorID)
-VALUES ('Eye Examination', 'Comprehensive eye examination', 60, 3);
+VALUES ('Eye Examination', 'Comprehensive eye examination', 60, 23);
 
 INSERT INTO PHARMACY (PharmacyName, Location, ContactNumber)
 VALUES ('Best Meds', '789 Maple Drive', '555-9876');
@@ -91,6 +91,7 @@ SELECT * FROM Doctor;
 SELECT * FROM PATIENT;
 SELECT * FROM APPOINTMENT;
 SELECT * FROM PROCEDURE;
+SELECT * FROM PHARMACY;
 
 
 DELETE FROM USERS

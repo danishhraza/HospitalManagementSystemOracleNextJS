@@ -26,13 +26,13 @@ export default async function Home() {
                 buttonLabel="Find Now"
                 buttonHref="/doctors"
               />
-                <Cards
+              <Cards
                 imageSrc="/images/Doctor.png"
                 title="Affiliated Pharmacies"
                 buttonLabel="Browse"
                 buttonHref="/pharmacies"
               />
-                <Cards
+              <Cards
                 imageSrc="/images/Doctor.png"
                 title="Procedures"
                 buttonLabel="Browse"
@@ -69,19 +69,25 @@ export default async function Home() {
                 title="My Appointments"
                 buttonLabel="View All"
                 buttonHref="/myappointmentsdoctor"
-              />    
+              />
               <Cards
                 imageSrc="/images/lookup.png"
                 title="Add Procedure"
                 buttonLabel="Add"
                 buttonHref="/addprocedure"
-              />    
+              />
               <Cards
-              imageSrc="/images/lookup.png"
-              title="Update Appointments"
-              buttonLabel="Update"
-              buttonHref="/updateappointment"
-            />
+                imageSrc="/images/lookup.png"
+                title="Manage Procedures"
+                buttonLabel="Manage"
+                buttonHref="/manageprocedures"
+              />
+              <Cards
+                imageSrc="/images/lookup.png"
+                title="Update Appointments"
+                buttonLabel="Update"
+                buttonHref="/updateappointment"
+              />
             </>
           )}
           {userRole === "admin" && (
@@ -92,11 +98,17 @@ export default async function Home() {
                 buttonLabel="Add"
                 buttonHref="/adddoctor"
               />
-               <Cards
+              <Cards
                 imageSrc="/images/patient.png"
                 title="Add Pharmacy"
                 buttonLabel="Add"
                 buttonHref="/addpharmacy"
+              />
+              <Cards
+                imageSrc="/images/patient.png"
+                title="Manage Pharmacy"
+                buttonLabel="Manage"
+                buttonHref="/managepharmacies"
               />
             </>
           )}

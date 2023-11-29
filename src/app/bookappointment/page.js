@@ -71,6 +71,7 @@ const Book = () => {
       if (response.ok) {
         // Handle successful appointment booking
         console.log("Appointment booked successfully");
+        router.push("/myappointments");
         // You can also redirect the user to a success page or display a success message.
       } else {
         // Handle error when booking appointment
