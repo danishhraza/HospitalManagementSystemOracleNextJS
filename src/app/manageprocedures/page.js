@@ -85,7 +85,7 @@ export default function ProceduresList() {
     <div className="mt-[9rem]">
       <div className="flex justify-center mb-10">
         <div className="text-center bg-[#0F3D3E] p-7 w-[50%] text-white text-5xl rounded-2xl backdrop-blur-lg">
-          <h1>Available Procedures</h1>
+          <h1>Manage Procedures</h1>
         </div>
       </div>
       <div className="flex flex-wrap justify-center mb-10">
