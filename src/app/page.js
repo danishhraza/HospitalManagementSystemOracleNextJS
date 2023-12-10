@@ -27,19 +27,19 @@ export default async function Home() {
                 buttonHref="/doctors"
               />
               <Cards
-                imageSrc="/images/Doctor.png"
+                imageSrc="/images/pharmacy.png"
                 title="Affiliated Pharmacies"
                 buttonLabel="Browse"
                 buttonHref="/pharmacies"
               />
               <Cards
-                imageSrc="/images/Doctor.png"
+                imageSrc="/images/procedure.png"
                 title="Procedures"
                 buttonLabel="Browse"
                 buttonHref="/procedures"
               />
               <Cards
-                imageSrc="/images/Doctor.png"
+                imageSrc="/images/procedure.png"
                 title="Discontinued Procedures"
                 buttonLabel="Browse"
                 buttonHref="/discontinuedprocedures"
@@ -77,13 +77,13 @@ export default async function Home() {
                 buttonHref="/myappointmentsdoctor"
               />
               <Cards
-                imageSrc="/images/lookup.png"
+                imageSrc="/images/procedure.png"
                 title="Add Procedure"
                 buttonLabel="Add"
                 buttonHref="/addprocedure"
               />
               <Cards
-                imageSrc="/images/lookup.png"
+                imageSrc="/images/procedure.png"
                 title="Manage Procedures"
                 buttonLabel="Manage"
                 buttonHref="/manageprocedures"
@@ -105,13 +105,13 @@ export default async function Home() {
                 buttonHref="/adddoctor"
               />
               <Cards
-                imageSrc="/images/patient.png"
+                imageSrc="/images/pharmacy.png"
                 title="Add Pharmacy"
                 buttonLabel="Add"
                 buttonHref="/addpharmacy"
               />
               <Cards
-                imageSrc="/images/patient.png"
+                imageSrc="/images/pharmacy.png"
                 title="Manage Pharmacy"
                 buttonLabel="Manage"
                 buttonHref="/managepharmacies"
