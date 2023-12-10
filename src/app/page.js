@@ -38,6 +38,12 @@ export default async function Home() {
                 buttonLabel="Browse"
                 buttonHref="/procedures"
               />
+              <Cards
+                imageSrc="/images/Doctor.png"
+                title="Discontinued Procedures"
+                buttonLabel="Browse"
+                buttonHref="/discontinuedprocedures"
+              />
               <Cards2
                 imageSrc="/images/lookup.png"
                 title="Lookup Your Appointment"
